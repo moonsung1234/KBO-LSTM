@@ -1,6 +1,6 @@
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.preprocessing import PolynomialFeatures
 from tensorflow import keras
 import matplotlib.pyplot as plt
@@ -43,6 +43,13 @@ class Model :
                 new_data += splited_batch
 
         new_data = np.array(new_data)
+
+        # # make features
+        # poly = PolynomialFeatures()
+        
+        # for i in range(new_data.shape[-1]) :    
+        #     new_data_shape = new_data.shape
+        #     new_data = poly.fit_transform(new_data.reshape())
 
         # scale data
         for i in range(new_data.shape[-1]) :
@@ -114,7 +121,7 @@ class Model :
         plt.show()
 
     def predict(self, predict_input) :
-        new_data = predict_input
+        new_data = predict_input.copy()
 
         # scale data
         for i in range(new_data.shape[-1]) :
