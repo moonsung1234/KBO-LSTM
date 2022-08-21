@@ -59,6 +59,9 @@ class Model :
 
         return new_data
 
+    def get_data(self) :
+        return self.__replace()
+
     def load(self) :
         self.model = keras.models.load_model(self.model_file_path)
         
@@ -66,7 +69,7 @@ class Model :
             self.scaler_list = pickle.load(fp)
 
     def train(self) :
-        data = self.__replace(file_path="./data.csv", data_length=5)
+        data = self.__replace()
 
         train_x = data[:, :-1]
         train_t = data[:, -1, 0]
@@ -111,7 +114,16 @@ class Model :
         plt.show()
 
     def predict(self, predict_input) :
-        predict = self.model.predict(predict_input)
+        new_data = predict_input
+
+        # scale data
+        for i in range(new_data.shape[-1]) :
+            scaler = self.scaler_list[i]
+
+            new_data_shape = new_data[:, :, i].shape
+            new_data[:, :, i] = scaler.fit_transform(new_data[:, :, i].flatten().reshape(-1, 1)).reshape(new_data_shape)
+
+        predict = self.model.predict(new_data)
         scaler = self.scaler_list[0]
 
         return scaler.inverse_transform(predict)
