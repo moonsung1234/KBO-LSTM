@@ -20,9 +20,9 @@
 ## Predict
 
 <img 
-    src="![김현수](https://user-images.githubusercontent.com/71556009/185950621-14c1b60d-4509-4efb-aa71-0e158639567a.jpg)"
+    src="https://user-images.githubusercontent.com/71556009/185950621-14c1b60d-4509-4efb-aa71-0e158639567a.jpg"
     width="500px" 
-    height="700px"
+    height="500px"
 />
 - 본 예시로 사용한 선수 : 김현수 (LG)
 
