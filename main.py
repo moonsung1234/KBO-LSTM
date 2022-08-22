@@ -351,16 +351,75 @@ predict_input = np.array([
 
 # 1. 마지막 성적을 예측한 그래프 만들기
 predict_value = model.predict(predict_input[:, -5:])
-year = np.array([[2018], [2019], [2020], [2021], [2022]])
+year = np.array([2018, 2019, 2020, 2021, 2022]).reshape(-1, 1)
 
-plt.subplot(3, 1, 1)
-plt.plot(np.array([[2022], [2023]]), np.concatenate((predict_input[:, -1, :1], predict_value), axis=0), color="red", marker="o")
-plt.plot(year, predict_input[0, -5:, :1], color="blue", marker="o")
+plt.subplot(2, 1, 1)
+plt.plot(
+    np.array([[2022], [2023]]), 
+    np.concatenate((predict_input[:, -1, :1], predict_value), axis=0),
+    color="red",
+    marker="o"
+)
+plt.plot(
+    year, 
+    predict_input[0, -5:, :1], 
+    color="blue", 
+    marker="o"
+)
+
+for i, sample in enumerate(np.concatenate((predict_input[:, -1, :1], predict_value), axis=0).flatten().tolist()) :
+    plt.text(
+        np.array([[2022], [2023]])[i], 
+        sample + 0.01,
+        "%.2f" % sample,
+        horizontalalignment="center",
+        # verticalalignment="bottom",
+        color="red"
+    )
+
+for i, sample in enumerate(predict_input[0, -5:, :1].flatten().tolist()) :
+    plt.text(
+        year[i], 
+        sample + 0.01,
+        "%.2f" % sample,
+        horizontalalignment="center",
+        # verticalalignment="top",
+        color="blue"
+    )
+
+plt.xlabel("year")
+plt.ylabel("batting average")
 
 # 2. 중간중간 성적을 예측한 그래프 만들기
+data = []
+year = np.array([2011, 2012, 2013, 2014, 2015, 2018, 2019, 2020, 2021, 2022, 2023]).reshape(-1, 1)
 
+for i in range(predict_input.shape[1] - 4) :
+    predict_value = model.predict(predict_input[:, i:i+5])
 
-# 3. 초반 성적을 던져주고 나머지를 예측한 그래프 만들기
+    data.append(predict_value[0, 0])
 
+data = np.array(data).reshape(-1, 1)
+
+plt.subplot(2, 1, 2)
+plt.plot(
+    year,
+    data,
+    color="red",
+    marker="o"
+)
+
+for i, sample in enumerate(data.flatten().tolist()) :
+    plt.text(
+        year[i], 
+        sample + 0.01,
+        "%.2f" % sample,
+        horizontalalignment="center",
+        # verticalalignment="bottom",
+        color="red"
+    )
+
+plt.xlabel("year")
+plt.ylabel("batting average")
 
 plt.show()
