@@ -19,13 +19,17 @@
 
 ## Predict
 
-![김현수](https://user-images.githubusercontent.com/71556009/185950621-14c1b60d-4509-4efb-aa71-0e158639567a.jpg)
+<img 
+    src="![김현수](https://user-images.githubusercontent.com/71556009/185950621-14c1b60d-4509-4efb-aa71-0e158639567a.jpg)"
+    width="500px" 
+    height="700px"
+/>
 - 본 예시로 사용한 선수 : 김현수 (LG)
 
 ![model_graph](https://user-images.githubusercontent.com/71556009/185950647-517409ee-da4b-4e76-8f6e-098af75bdd0e.png)
 
-1. 마지막 성적을 예측한 그래프 (red)
-2. 중간중간 성적을 예측한 그래프 (red)
+> 1. 마지막 성적을 예측한 그래프 (red)
+> 2. 중간중간 성적을 예측한 그래프 (red)
 
 <br/>
 
